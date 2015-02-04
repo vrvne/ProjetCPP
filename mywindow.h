@@ -26,6 +26,7 @@ public:
     bool save_sigma();
     bool save_T();
     bool save_n(bool checked);
+    QString message() ;
 
 public slots:
     //void message();

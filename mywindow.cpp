@@ -1,6 +1,7 @@
 #include "mywindow.h"
 #include "resultwindow.h"
 
+#include "deltaneutral.h"
 
 MyWindow::MyWindow() :QWidget()
 {
@@ -208,7 +209,7 @@ void MyWindow::open_result()
         QMessageBox::warning(this,"",message) ;
         return ;
     }
-    ResultWindow *result=new ResultWindow;
+    ResultWindow *result=new ResultWindow(this);
     result->show();
 }
 
@@ -235,4 +236,10 @@ void MyWindow::change_position(bool loong)
     else{
     loong=true;
     }
+}
+
+QString MyWindow::message()
+{
+    QString s = QString::fromStdString(DeltaNeutral(calll, loong, S0, K, T, r, sigma));
+    return s;
 }

@@ -2,6 +2,8 @@
 #include "simwindow.h"
 #include "resultwindow.h"
 
+#include "deltaneutral.h"
+
 SimWindow::SimWindow() : QWidget()
 {
     this->setWindowTitle("Get our simulations");
@@ -193,7 +195,7 @@ void SimWindow::open_simulation()
         QMessageBox::warning(this,"",message) ;
         return ;
     }
-    ResultWindow *sim=new ResultWindow;
+    ResultWindow *sim=new ResultWindow(this);
     sim->show();
 }
 
@@ -222,6 +224,11 @@ void SimWindow::change_position(bool loong)
     }
 }
 
+QString SimWindow::message()
+{
+    QString s = QString::fromStdString(DeltaNeutral(calll, loong, S0, K, T, r, sigma));
+    return s;
+}
 
 
 
