@@ -23,16 +23,25 @@ string DeltaNeutral(bool calll, bool loong, double S0, double K, double T, doubl
             return (s.toStdString());
         }
         else {
-            return("Number of shares to sell " + printf("%3.2f\n",delta));
+            QString s= "Number of shares to sell: " ;
+            QTextStream stream(&s) ;
+            stream << delta ;
+            return (s.toStdString());
         }
     }
     else {
         double delta=normalDistribution(d1)-1;
         if (!loong) {
-            return("Number of shares to sell " + printf("%3.2f\n",delta));
+            QString s= "Number of shares to sell: " ;
+            QTextStream stream(&s) ;
+            stream << delta ;
+            return (s.toStdString());
         }
         else {
-            return ("Number of shares to buy: " + printf("%3.2f\n",delta));
+            QString s= "Number of shares to buy: " ;
+            QTextStream stream(&s) ;
+            stream << delta ;
+            return (s.toStdString());
         }
     }
 }
