@@ -42,7 +42,7 @@ double randnorm;
 
 // On implémente à présent la méthode d'Euler stochastique
 // "i" est l'indice du dernier point simulé dans la liste "S"/
-for (int i=0; i<N+1; i++) {
+for (int i=0; i<N; i++) {
     randunif=gen.NextDouble();
     randunif2=gen.NextDouble();
     double valuepi=atan(1)*4;
@@ -123,7 +123,7 @@ string SimulationHedge(double S0, double sigma, double drift, double T, double N
         }
     }
 
-    if earnings > 0 {
+    if (earnings > 0) {
         QString s = "With these parameters, you would earn: ";
         QTextStream stream(&s);
         stream << earnings;
@@ -139,7 +139,7 @@ string SimulationHedge(double S0, double sigma, double drift, double T, double N
         
     }
     
-    }
+
 
 
 }

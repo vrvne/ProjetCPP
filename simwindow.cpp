@@ -1,7 +1,7 @@
 
 #include "simwindow.h"
+#include "simulation.h"
 #include "resultwindow.h"
-
 #include "deltaneutral.h"
 
 SimWindow::SimWindow() : QWidget()
@@ -226,10 +226,9 @@ void SimWindow::change_position(bool loong)
 
 QString SimWindow::message()
 {
-    QString s = QString::fromStdString(DeltaNeutral(calll, loong, S0, K, T, r, sigma,n));
+    QString s = QString::fromStdString(SimulationHedge(S0, sigma, 0, T, 1000, calll, loong, K, r, 500));
     return s;
 }
-
 
 
 

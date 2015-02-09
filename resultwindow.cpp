@@ -32,6 +32,7 @@ ResultWindow::ResultWindow(SimWindow *window) : QWidget()
   LB_res= new QLabel(messageW);
 
   layout->addWidget( LB_res,0,0);
+  connect(PB_Ok2,SIGNAL(clicked()),this,SLOT(close()));
 
 }
 
