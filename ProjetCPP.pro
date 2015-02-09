@@ -17,6 +17,7 @@ SOURCES += main.cpp\
     mywindow.cpp \
     resultwindow.cpp \
     simwindow.cpp \
+    simulation.cpp\
     guidewindow.cpp \
     uniformgenlc.cpp \
     uniformgen.cpp \
@@ -27,6 +28,7 @@ HEADERS  += mainwindow.h \
     mywindow.h \
     resultwindow.h \
     simwindow.h \
+    simulation.h\
     guidewindow.h \
     uniformgenlc.h \
     uniformgen.h \

@@ -226,7 +226,7 @@ void SimWindow::change_position(bool loong)
 
 QString SimWindow::message()
 {
-    QString s = QString::fromStdString(DeltaNeutral(calll, loong, S0, K, T, r, sigma));
+    QString s = QString::fromStdString(DeltaNeutral(calll, loong, S0, K, T, r, sigma,n));
     return s;
 }
 
