@@ -5,4 +5,4 @@
 using namespace std;
 
 QVector<double> BrownGeom(double, double, double, double, double);
-double SimulationHedge(double, double, double, double, double, bool, bool, double, double, double);
+string SimulationHedge(double, double, double, double, double, bool, bool, double, double, double);
