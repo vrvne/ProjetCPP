@@ -6,7 +6,7 @@
 
 SimWindow::SimWindow() : QWidget()
 {
-    this->setWindowTitle("Get our simulations");
+    this->setWindowTitle("Get our simulations!!!!");
     QGridLayout *layout = new QGridLayout ;
 
     PB_sim=new QPushButton("Simulation");
