@@ -4,7 +4,7 @@
 GuideWindow::GuideWindow() : QWidget()
 {
     this->setWindowTitle("Portfolio Replicating Program");
-        QLabel *label_png = new QLabel();
+        label_png = new QLabel();
         //label->set(50);
 
         QDir dir = QDir() ;
@@ -24,7 +24,7 @@ GuideWindow::GuideWindow() : QWidget()
         gridLayout->addWidget(label_png, 0, 0);
         setLayout(gridLayout);
 
-        QLabel *label_welcome = new QLabel("Welcome to our Portfolio Replicating simulation program!!!");
+        label_welcome = new QLabel("Welcome to our Portfolio Replicating simulation program!!!");
         gridLayout->addWidget(label_welcome, 0, 1);
 
 
