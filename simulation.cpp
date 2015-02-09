@@ -76,7 +76,7 @@ double SimulationHedge(double S0, double sigma, double drift, double T, double N
     // On doit stocker à chaque instant de hedging combien d'actifs sont en portefeuille
     QVector<double> NbActifs(Nb_Hedge);
     for (int k=0; k<Nb_Hedge; k++) {
-        NbActifs[k]=DeltaNeutral2(calll, loong, S[floor(k*N/Nb_Hedge)], K, T, r, sigma,n);
+        NbActifs[k]=DeltaNeutral2(calll, loong, S[floor(k*N/Nb_Hedge)], K, T, r, sigma);
     }
 
     // On observe maintenant la situation du portefeuille à l'instant T
