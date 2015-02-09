@@ -50,12 +50,11 @@ string DeltaNeutral(bool calll, bool loong, double S0, double K, double T, doubl
 
 
 // DeltaNeutral2 envoie sous la forme d'un doube l'instruction à l'utilisateur (>0 : achat, <0 : vente)
-double DeltaNeutral2(bool calll, bool loong, double S0, double K, double T, double r, double sigma, double n) {
+double DeltaNeutral2(bool calll, bool loong, double S0, double K, double T, double r, double sigma) {
     double d1;
     d1=(log(S0/K)+(r+0.5*pow(sigma,2))*T)/(sigma*sqrt(T));
     if (calll) {
         double delta=normalDistribution(d1);
-        delta=n*delta;
         if (!loong) {
             return (delta);
         }
@@ -65,7 +64,6 @@ double DeltaNeutral2(bool calll, bool loong, double S0, double K, double T, doub
     }
     else {
         double delta=normalDistribution(d1)-1;
-        delta=n*delta;
         if (!loong) {
             return(-delta);
         }
