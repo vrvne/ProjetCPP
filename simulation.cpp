@@ -7,7 +7,8 @@ using namespace std;
 #include "deltaneutral.h"
 #include "uniformgenlc.h"
 #include <QVector>
-
+#include <QString>
+#include <QTextStream>
 
 // On définit une première fonction BrownGeom qui simule l'évolution d'un actif
 QVector<double> BrownGeom(double S0, double sigma, double drift, double T, double N) {
@@ -64,7 +65,7 @@ return S;
 
 // On définit une seconde fonction qui étudie l'effet (sur le pay-off) d'un delta-hedging effectué à certains instants
 
-double SimulationHedge(double S0, double sigma, double drift, double T, double N, bool calll, bool loong, double K, double r, double Nb_Hedge) {
+string SimulationHedge(double S0, double sigma, double drift, double T, double N, bool calll, bool loong, double K, double r, double Nb_Hedge) {
     /* Un point sur les paramètres :
     S0, sigma, drift, T, N, optiontype, position, K, r : cf. BrownGeom et DeltaNeutral
     Nb_Hedge : nombre de hedging opérés ; l'utilisateur doit impérativement choisir Nb_Hedge < N
@@ -104,7 +105,7 @@ double SimulationHedge(double S0, double sigma, double drift, double T, double N
             }
         }
     }
-    else { // partie à revérifier !!!!!
+    else { 
         if (!loong) {
             if (K-S[N] > 0) {
                 SharesToSell=1+NbActifs[Nb_Hedge-1];
@@ -122,7 +123,23 @@ double SimulationHedge(double S0, double sigma, double drift, double T, double N
         }
     }
 
-    return(earnings);
+    if earnings > 0 {
+        QString s = "With these parameters, you would earn: ";
+        QTextStream stream(&s);
+        stream << earnings;
+        return(s.toStdString());
+    }
+    else {
+        earnings=-earnings;
+        QString s = "With these parameters, you would loose: ";
+        QTextStream stream(&s);
+        stream << earnings;
+        return(s.toStdString());        
+    
+        
+    }
+    
+    }
 
 
 }
