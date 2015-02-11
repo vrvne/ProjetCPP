@@ -13,7 +13,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     mywindow.cpp \
     resultwindow.cpp \
     simwindow.cpp \
@@ -24,7 +23,7 @@ SOURCES += main.cpp\
     normaldistribution.cpp \
     deltaneutral.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     mywindow.h \
     resultwindow.h \
     simwindow.h \

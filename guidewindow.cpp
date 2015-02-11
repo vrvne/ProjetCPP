@@ -17,7 +17,7 @@ GuideWindow::GuideWindow() : QWidget()
         int w = label_png->width();
         int h = label_png->height();
 
-        // set a scaled pixmap to a w x h window keeping its aspect ratio
+        // set a scaled pixmap to a w*h window keeping its aspect ratio
         label_png->setPixmap(p->scaled(w,h,Qt::KeepAspectRatio));
 
         QGridLayout *gridLayout = new QGridLayout;

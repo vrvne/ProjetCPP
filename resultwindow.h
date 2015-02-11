@@ -12,15 +12,16 @@
 #include <QTextStream>
 #include <QLabel>
 
-
+// on a besoin de ces deux classes
 class MyWindow ;
 class SimWindow;
 
 class ResultWindow: public QWidget
 { Q_OBJECT
 public:
-    ResultWindow(MyWindow* window);
 
+    // ResultWindow peut prendre deux types d'argument
+    ResultWindow(MyWindow* window);
     ResultWindow(SimWindow* window);
     ~ResultWindow();
 private:
@@ -28,20 +29,6 @@ private:
     QLabel *LB_res;
     double n;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

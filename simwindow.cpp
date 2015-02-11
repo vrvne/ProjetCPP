@@ -5,19 +5,19 @@
 #include "deltaneutral.h"
 
 SimWindow::SimWindow() : QWidget()
-{
+{   // donner un nom à la fenetre
     this->setWindowTitle("Get our simulations!!!!");
-    QGridLayout *layout = new QGridLayout ;
+
+// instancier les Qwidgets
+    layout = new QGridLayout ;
 
     PB_sim=new QPushButton("Simulation");
     PB_sim->setFont(QFont("Comic Sans MS",14));
     PB_sim->setCursor(Qt::PointingHandCursor);
-    layout->addWidget(PB_sim,15,0);
 
     PB_quit=new QPushButton("Quit");
     PB_quit->setFont(QFont("Comic Sans MS",14));
     PB_quit->setCursor(Qt::PointingHandCursor);
-    layout->addWidget(PB_quit,15,1);
 
 
     LE_S0=new QLineEdit;
@@ -38,19 +38,24 @@ SimWindow::SimWindow() : QWidget()
     calll=true;
     SB_nPut->setDisabled(true);
 
-    QGroupBox *groupbox=new QGroupBox("Option Type",this);
-    QHBoxLayout *hbox=new QHBoxLayout;
+    // création de deux groupboxs en utilisant un layout horizontal
+    // pour "type d'option" et "position" repectivement
+    // avec deux RadioButtons dans chaque groupbox
+
+    groupbox=new QGroupBox("Option Type",this);
+    hbox=new QHBoxLayout;
     hbox->addWidget(RB_call);
     hbox->addWidget(RB_put);
     groupbox->setLayout(hbox);
 
-    QGroupBox *groupbox2=new QGroupBox("Position",this);
-    QHBoxLayout *hbox2=new QHBoxLayout;
+    groupbox2=new QGroupBox("Position",this);
+    hbox2=new QHBoxLayout;
     hbox2->addWidget(RB_long);
     hbox2->addWidget(RB_short);
     groupbox2->setLayout(hbox2);
 
 
+    // instancier les labels
     Label_S0=new QLabel("Initial Value");
     Label_K=new QLabel("Strike");
     Label_r=new QLabel("Interest Rate");
@@ -60,7 +65,8 @@ SimWindow::SimWindow() : QWidget()
     Label_nPut=new QLabel("Number of Puts");
 
 
-
+    // on ajoute dans le layout les widgets que l'on a créés
+    // la deuxième colonne (,1)
     layout->addWidget(LE_S0,0,1);
     layout->addWidget(LE_K,1,1);
     layout->addWidget(LE_r,2,1);
@@ -68,26 +74,38 @@ SimWindow::SimWindow() : QWidget()
     layout->addWidget(LE_T,4,1);
     layout->addWidget(SB_nCall,13,1);
     layout->addWidget(SB_nPut,14,1);
+    layout->addWidget(PB_quit,15,1);
 
+    // la première colonne (,0)
     layout->addWidget(Label_S0,0,0);
     layout->addWidget(Label_K,1,0);
     layout->addWidget(Label_r,2,0);
     layout->addWidget(Label_sigma,3,0);
     layout->addWidget(Label_T,4,0);
+    layout->addWidget(Label_nCall,13,0);
+    layout->addWidget(Label_nPut,14,0);
+    layout->addWidget(PB_sim,15,0);
 
 
+    // on y ajoute les deux groupboxs
     layout->addWidget(groupbox2,5,0,2,3);
     layout->addWidget(groupbox,9,0,2,3);
 
-    layout->addWidget(Label_nCall,13,0);
-    layout->addWidget(Label_nPut,14,0);
 
+    // on affiche le layout sur la fenêtre
     setLayout(layout);
 
+
+    // connexion des signaux et des slots
+
+    // si on click sur PB_quit, on quite la fenêtre
     connect(PB_quit,SIGNAL(clicked()),this,SLOT(close())) ;
+    // si on click sur PB_res, on exécute la fonction open_simulation()
     connect(PB_sim,SIGNAL(clicked()),this,SLOT(open_simulation())) ;
-    connect(RB_call,SIGNAL(toggled(bool)),this,SLOT(disable(bool)));
-    connect(RB_long,SIGNAL(toggled(bool)),this,SLOT(change_position(bool)));
+    // si coche ou décoche RB_call, on exécute la fonction disable()
+    connect(RB_call,SIGNAL(toggled(bool)),this,SLOT(disable()));
+    // si coche ou décoche RB_long, on exécute la fonction change_position()
+    connect(RB_long,SIGNAL(toggled(bool)),this,SLOT(change_position()));
 
 }
 
@@ -113,12 +131,18 @@ SimWindow::~SimWindow()
     delete Label_T;
     delete Label_nCall;
     delete Label_nPut;
-
+    delete layout;
+    delete groupbox;
+    delete groupbox2;
+    delete hbox;
+    delete hbox2;
 }
 
 
 bool SimWindow::save_S0()
 {
+    //la fonction permet de prendre ce qui est saisi par utilisateur dans LE_S0 dans la variable S0
+    //la fonction renvoi vrai si S0 n'est pas nul
     S0=0;
     QString s1 = LE_S0->text() ;
     QTextStream stream(&s1) ;
@@ -131,6 +155,8 @@ bool SimWindow::save_S0()
 
 bool SimWindow::save_K()
 {
+    //la fonction permet de prendre ce qui est saisi par utilisateur dans LE_K dans la variable K
+    //la fonction renvoi vrai si K n'est pas nul
     K=0;
     QString s1 = LE_K->text() ;
     QTextStream stream(&s1) ;
@@ -143,6 +169,8 @@ bool SimWindow::save_K()
 
 bool SimWindow::save_r()
 {
+    //la fonction permet de prendre ce qui est saisi par utilisateur dans LE_r dans la variable r
+    //la fonction renvoi vrai si r n'est pas nul
     r=0;
     QString s1 = LE_r->text() ;
     QTextStream stream(&s1) ;
@@ -155,6 +183,8 @@ bool SimWindow::save_r()
 
 bool SimWindow::save_T()
 {
+    //la fonction permet de prendre ce qui est saisi par utilisateur dans LE_T dans la variable T
+        //la fonction renvoi vrai si T n'est pas nul
     T=0;
     QString s1 = LE_T->text() ;
     QTextStream stream(&s1) ;
@@ -165,19 +195,29 @@ bool SimWindow::save_T()
     return true;
 }
 
-bool SimWindow::save_n(bool calll)
+bool SimWindow::save_n()
 {
+    //la fonction permet de prendre la valeur de n
+    //si c'est un call, n prend la valeur de SB_nCall
+    //si c'est un put, n prend la valeur de SB_nPut
+    //la fonction renvoi vrai si n n'est pas nul
+    n=0;
     if(calll){
     n = SB_nCall->value();
     }
     else{
     n = SB_nPut->value();
     }
-    return true ;
+    if (n==0){
+        return false;
+    }
+    return true;
 }
 
 bool SimWindow::save_sigma()
 {
+    //la fonction permet de prendre ce qui est saisi par utilisateur dans LE_sigma dans la variable Sigma
+    //la fonction renvoi vrai si Sigma n'est pas nul
     sigma=0;
     QString s1 = LE_sigma->text() ;
     QTextStream stream(&s1) ;
@@ -189,8 +229,9 @@ bool SimWindow::save_sigma()
 }
 
 void SimWindow::open_simulation()
-{
-    if (!save_K() | !save_S0() |!save_T() |!save_n(calll) |!save_r() |!save_sigma() ){
+{   // Si les LineEdits et n étaient bien saisis, on ouvre le ResultWindow,
+    // sinon on affiche une message de warning, qui dit à l'utilisateur de remplir les cases
+    if (!save_K() | !save_S0() |!save_T() |!save_n() |!save_r() |!save_sigma() ){
         QString message="ERROR! Please entre a real!";
         QMessageBox::warning(this,"",message) ;
         return ;
@@ -200,24 +241,28 @@ void SimWindow::open_simulation()
 }
 
 
-void SimWindow::disable(bool calll)
+void SimWindow::disable()
 {
+
+    // si le booléen calll est vrai, il devient faux et vice versa
+    // en même temps, on active ou désactive les SpinBoxs correspondants
     if(calll){
-        calll=false;
-        SB_nPut->setDisabled(true);
-        SB_nCall->setEnabled(true);
-    }
-    else{
-    calll=true;
+    calll=false;
     SB_nCall->setDisabled(true);
     SB_nPut->setEnabled(true);
     }
+    else{
+    calll=true;
+    SB_nPut->setDisabled(true);
+    SB_nCall->setEnabled(true);
+    }
 }
 
-void SimWindow::change_position(bool loong)
+void SimWindow::change_position()
 {
+    // la valeur du booléen loong change si on change la valeur de RadioButton_long
     if(loong){
-        loong=false;
+    loong=false;
     }
     else{
     loong=true;
@@ -226,7 +271,8 @@ void SimWindow::change_position(bool loong)
 
 QString SimWindow::message()
 {
-    QString s = QString::fromStdString(SimulationHedge(S0, sigma, 0, T, 1000, calll, loong, K, r, 500));
+    // la fonction permet d'afficher le resultat calculé dans QString s
+        QString s = QString::fromStdString(SimulationHedge(S0, sigma, 0, T, 1000, calll, loong, K, r, 500));
     return s;
 }
 

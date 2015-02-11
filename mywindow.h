@@ -25,14 +25,13 @@ public:
     bool save_r();
     bool save_sigma();
     bool save_T();
-    bool save_n(bool checked);
-    QString message() ;
+    bool save_n();
+    QString message();
 
 public slots:
-    //void message();
     void open_result();
-    void disable(bool);
-    void change_position(bool);
+    void disable();
+    void change_position();
 
 private:
     QPushButton *PB_res;
@@ -55,8 +54,12 @@ private:
     QLabel *Label_nPut;
     QLabel *Label_r;
     QLabel *Label_sigma;
+    QGridLayout *layout ;
+    QGroupBox *groupbox;
+    QHBoxLayout *hbox;
+    QGroupBox *groupbox2;
+    QHBoxLayout *hbox2;
 
-    //QLabel *Label_position;
     double S0;
     double K;
     double r;
