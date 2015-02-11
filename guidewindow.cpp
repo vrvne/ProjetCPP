@@ -3,21 +3,22 @@
 
 GuideWindow::GuideWindow() : QWidget()
 {
+    //titre de la fenetre
     this->setWindowTitle("Portfolio Replicating Program");
         label_png = new QLabel();
-        //label->set(50);
 
+        //QDir() donne l'access du répertoire du programme
+        // on va prendre le chemin d'acces de l'image dans s
         QDir dir = QDir() ;
         QPixmap *p = new QPixmap ;
         QString s = dir.absoluteFilePath("argent.png") ;
-        //QMessageBox::warning(0,"",s) ;
         p->load(s);
-        //label->setPixmap(*p);
 
+        // on essaye de garder la même echeclle d'image
         int w = label_png->width();
         int h = label_png->height();
 
-        // set a scaled pixmap to a w*h window keeping its aspect ratio
+        // on affiche l'image sur label
         label_png->setPixmap(p->scaled(w,h,Qt::KeepAspectRatio));
 
         QGridLayout *gridLayout = new QGridLayout;
@@ -39,6 +40,7 @@ GuideWindow::GuideWindow() : QWidget()
         PB_sim->setCursor(Qt::PointingHandCursor);
         gridLayout->addWidget(PB_sim,2,1);
 
+        // on est dirigé vers deux fonctions, si on click sur les deux boutons
         connect(PB_res,SIGNAL(clicked()),this,SLOT(on_PB_res_clicked())) ;
         connect(PB_sim,SIGNAL(clicked()),this,SLOT(on_PB_sim_clicked())) ;
 
@@ -55,12 +57,14 @@ GuideWindow::~GuideWindow()
 
 void GuideWindow::on_PB_res_clicked()
 {
+    // si on click sur PB_res, la fenêtre window2 de type MyWindow s'ouvre
     MyWindow *window2=new MyWindow;
     window2->show();
 }
 
 void GuideWindow::on_PB_sim_clicked()
 {
+    // si on click sur PB_sim, la fenêtre simwindow2 de type SimWindow s'ouvre
     SimWindow *simwindow2=new SimWindow;
     simwindow2->show();
 
