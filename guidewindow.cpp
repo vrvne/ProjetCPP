@@ -5,22 +5,25 @@ GuideWindow::GuideWindow() : QWidget()
 {
     //titre de la fenetre
     this->setWindowTitle("Portfolio Replicating Program");
-        label_png = new QLabel();
+    label_png = new QLabel();
 
         //QDir() donne l'access du répertoire du programme
         // on va prendre le chemin d'acces de l'image dans s
+        // et ensuite prendre l'image dans p
         QDir dir = QDir() ;
         QPixmap *p = new QPixmap ;
         QString s = dir.absoluteFilePath("argent.png") ;
         p->load(s);
 
         // on essaye de garder la même echeclle d'image
+        // on affiche l'image sur label
         int w = label_png->width();
         int h = label_png->height();
 
-        // on affiche l'image sur label
+
         label_png->setPixmap(p->scaled(w,h,Qt::KeepAspectRatio));
 
+        // A l'aide d'un QGridLayout, on organise l'affichage des deux labels et les deux boutons
         QGridLayout *gridLayout = new QGridLayout;
         gridLayout->addWidget(label_png, 0, 0);
         setLayout(gridLayout);

@@ -1,4 +1,4 @@
-//#include "mainwindow.h"
+
 #include "guidewindow.h"
 #include <QApplication>
 #include "mywindow.h"
@@ -8,16 +8,11 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //MyWindow Window;
-    //Window.show();
 
-    //MainWindow Window1;
-    //Window1.show();
-
+    // L'affichage de la fenêtre GuideWindow
 
     GuideWindow Window1;
     Window1.show();
 
-    //QMessageBox::warning(0,"","Bonjour") ;
     return a.exec();
 }
