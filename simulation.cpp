@@ -92,6 +92,7 @@ string SimulationHedge(double S0, double sigma, double drift, double T, double N
                 earnings=K-SharesToBuy*S[N];
             }
             else {
+                SharesToBuy=1-NbActifs[Nb_Hedge-1];
                 earnings=-SharesToBuy*S[N];
             }
         }
@@ -101,6 +102,7 @@ string SimulationHedge(double S0, double sigma, double drift, double T, double N
                 earnings=SharesToSell*S[N]-K;
             }
             else {
+                SharesToSell=1+NbActifs[Nb_Hedge-1];
                 earnings=SharesToSell*S[N];
             }
         }
@@ -112,6 +114,7 @@ string SimulationHedge(double S0, double sigma, double drift, double T, double N
                 earnings=K-SharesToSell*S[N];
             }
             else {
+                SharesToSell=1+NbActifs[Nb_Hedge-1];
                 earnings=-SharesToSell*S[N];
             }
         }
@@ -119,6 +122,10 @@ string SimulationHedge(double S0, double sigma, double drift, double T, double N
             if (K-S[N] > 0) {
                 SharesToBuy=1-NbActifs[Nb_Hedge-1];
                 earnings=SharesToBuy*S[N]-K;
+            }
+            else {
+                SharesToBuy=1-NbActifs[Nb_Hedge-1];
+                earnings=SharesToBuy*S[N];
             }
         }
     }
